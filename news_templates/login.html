@@ -1,0 +1,31 @@
+
+<h1>Login</h1>
+
+{% if login_error %}<p><strong>{{ login_error }}</strong></p>{% endif %}
+
+<form action="{% url news.views.login.login_view %}?next={{ next }}" method="post">
+	<label for="username">Username:</label>
+	<input name="username" size="20" maxlength="{{ settings.NEWS_MAX_USERNAME_LENGTH }}" 
+		type="text" value="{{ username }}" />
+	<label for="password">Password:</label>
+	<input name="password" size="20" maxlength="{{ settings.NEWS_MAX_PASSWORD_LENGTH }}" 
+		type="password" />
+	<input type="submit" value="submit" />
+</form>
+
+<h1>Create Account</h1>
+
+{% if create_account_error %}<p><strong>{{ create_account_error }}</strong></p>{% endif %}
+
+<form action="{% url news.views.login.create_account %}?next={{ next }}" method="post">
+	<label for="username">Username:</label>
+	<input name="username" size="20" maxlength="{{ settings.NEWS_MAX_USERNAME_LENGTH }}" 
+		type="text" value="{{ create_account_username }}" />
+	<label for="password">Password:</label>
+	<input name="password" size="20" maxlength="{{ settings.NEWS_MAX_PASSWORD_LENGTH }}" 
+		type="password" />
+	<input type="submit" value="submit" />
+</form>
+
+
+

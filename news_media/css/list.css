@@ -1,0 +1,104 @@
+@import url("number_and_arrows.css");
+
+/********************
+ This is a stub that holds the number from paginator (possibly), voting
+ arrows, news item info (news item title, short link, news item subinfo)
+ or comment info, news item text or comment text (possibly), reply text
+ box (possibly), and reply button (possibly).
+ ********************/
+.stub {
+	/* takes up 100% of the area (so 84% of the total area) */
+	width: 100%;
+
+	/* it messes up without this */
+	float: left;
+
+	padding-bottom: 5px;
+}
+.stub a { color: #828282; }
+.stub a:hover { text-decoration: underline; }
+
+/********************
+ This holds everything that the stub does, except for
+ the number from paginator and the voting arrows.
+ ********************/
+.rankable-info {
+	float: left;
+	/* this needs to be 92% because the arrows and 
+	 * possibly the number will take up the other 8 or so percent. */
+	max-width: 92%
+}
+
+/***********************
+ Small changes to make news item titles and 
+ abrreviated links look right 
+ ***********************/
+.news-item-title-and-link {
+	margin-bottom: 5px;
+	width: 100%;
+}
+
+
+
+
+/***************************
+ Reply input box.  Also see button 
+ for submitting a form.
+ ***************************/
+div.reply-box {
+	float: left;
+	margin-top: 15px;
+	clear: both;
+}
+
+
+/****************************
+ Button for submitting a form. 
+ ****************************/
+div.submit-comment {
+	margin-top: 20px;
+	font-weight: 400;
+	font-family: sans-serif;
+}
+div.submit-comment input { font-family: sans-serif; }
+
+
+/*****************************
+ "More" link at the bottom of the page. 
+ *****************************/
+div.morelink {
+	/* it messes up without this */
+	float: left;
+
+	padding-top: 10px;
+	padding-left: 5px;
+}
+div.morelink a:hover { text-decoration: underline; }
+
+
+/*****************************
+ Threaded comment list
+ *****************************/
+
+div.threaded-comment-list {
+	margin-top: 50px;
+	float: left;
+	width: 100%;
+}
+
+div.reply-link {
+	/*
+	float: left;
+	width: 100%;
+	*/
+	margin-bottom: 10px;
+}
+
+/****************************
+ dead news items and comments
+ ****************************/
+
+div.dead {
+    margin-bottom: 20px;
+    color: #828282;
+}

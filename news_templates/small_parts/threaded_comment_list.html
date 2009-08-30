@@ -1,0 +1,44 @@
+{% comment %}
+This is used to include a threaded list of comments.
+It uses the variable child_comments, which is a 
+dictionary of comments and depths.
+{% endcomment %}
+
+{% load news_extras %}
+
+<div class="threaded-comment-list">
+	{% for comment_dict in child_comments %}
+	{% with comment_dict.comment as comment %}
+		{% with comment_dict.depth|multiply:"5" as depth_percent %}
+		<div class="stub" style="padding-left: {{ depth_percent }}%; max-width: {{ 100|subtract:depth_percent }}%; clear: both;">
+		{% endwith %}
+            
+            {% if not comment.dead %}
+
+                {% with comment as rankable %}
+                    {% include "news/small_parts/arrows.html" %}
+                {% endwith %}
+
+                <div class="rankable-info">
+
+                    {% with "" as long_comment_info %}
+                        {% include "news/small_parts/comment_info.html" %}
+                    {% endwith %}
+
+                    <div class="reply-link">
+                        <a class="unimportant-text" href="{% url news.views.comments.comment comment.id %}">reply</a>
+                    </div>
+
+                </div>
+            {% endif %}
+
+            {% if comment.dead and comment.has_nondead_children %}
+                <div class="dead">
+                    [dead]
+                </div>
+            {% endif %}
+
+		</div>
+	{% endwith %}
+	{% endfor %}
+</div>

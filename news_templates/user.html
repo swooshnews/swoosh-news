@@ -1,0 +1,165 @@
+{% extends "news/base.html" %}
+
+{% load news_extras %}
+
+{% block title %}User: {{ viewing_userprofile.username }}{% endblock %}
+
+{% comment %}
+If the logged in user is looking at their own page,
+we show them a form to edit their page.
+{% endcomment %}
+
+{% block content %}
+	{% ifequal viewing_userprofile user.get_profile %}
+
+		{% if posting_error %}
+		<h3 class="posting-error">{{ posting_error }}</h3>
+		{% endif %}
+
+		<form action='{% url news.views.users.user viewing_userprofile.username %}'
+			method='post'>
+			<div class="stub basic-form">
+				<ul>
+					<li>
+						<div class="form-heading">
+							username
+						</div>
+						<div class="form-data important-text">
+							{{ viewing_userprofile.username }}
+						</div>
+					</li>
+
+					<li>
+						<div class="form-heading">
+							password
+						</div>
+						<a class="form-data important-text underline" href='{% url news.views.login.change_password %}'>change password</a>
+					</li>
+
+					<li>
+						<label class="form-heading" for="email_address">email</label>
+						{% if posting_error %}
+						<input class="form-data important-text" name="email_address" size="50" maxlength="{{ settings.NEWS_MAX_EMAIL_LENGTH }}" 
+							type="text" value="{{ error_email }}" />
+						{% else %}
+						<input class="form-data important-text" name="email_address" size="50" maxlength="{{ settings.NEWS_MAX_EMAIL_LENGTH }}" 
+							type="text" value="{{ viewing_userprofile.user.email }}" />
+						{% endif %}
+					</li>
+						
+					<li>
+						<label class="form-heading" for="option_show_email">show email</label>
+						<input class="form-data important-text" type="checkbox" name="option_show_email" {% if viewing_userprofile.option_show_email %}checked="checked"{% endif %} />
+					</li>
+
+					<li>
+						<label class="form-heading" for="website">url</label>
+						<input class="form-data important-text" name="website" size="50" maxlength="{{ settings.NEWS_MAX_URL_LENGTH }}" type="text" value="{% if posting_error %}{{ error_website }}{% else %}{{ viewing_userprofile.website }}{% endif %}" />
+					</li>
+
+					<li>
+						<div class="form-heading">
+							date joined
+						</div>
+						<div class="form-data important-text">
+							{{ viewing_userprofile.date_created }}
+						</div>
+					</li>
+
+					<li>
+						<div class="form-heading">
+							comment points
+						</div>
+						<a class="form-data important-text underline" href="{% url news.views.payment.buy_points %}">{{ viewing_userprofile.comment_points }}</a>
+					</li>
+
+					<li>
+						<label class="form-heading" for="about">about</label>
+						<textarea class="form-data important-text" name="about" cols="50" rows="4">{% if posting_error %}{{ error_about }}{% else %}{{ viewing_userprofile.about }}{% endif %}</textarea>
+					</li>
+
+					<li>
+						<label class="form-heading" for="option_use_javascript">use javascript</label>
+						<input class="form-data important-text" type="checkbox" name="option_use_javascript" {% if viewing_userprofile.option_use_javascript %}checked="checked"{% endif %} />
+					</li>
+
+					<li>
+						<label class="form-heading" for="option_show_dead">show dead</label>
+						<input class="form-data important-text" type="checkbox" name="option_show_dead" {% if viewing_userprofile.option_show_dead %}checked="checked"{% endif %} />
+					</li>
+
+					<li>
+						<div class="form-heading">
+							&nbsp;
+						</div>
+						<input class="form-data important-text submitbutton" type="submit" value="submit" />
+					</li>
+				</ul>
+
+			</div>
+		</form>
+
+
+
+	{% else %}
+
+		<div class="stub basic-form">
+			<ul>
+				<li>
+					<div class="form-heading">
+						username
+					</div>
+					<div class="form-data important-text">
+						{{ viewing_userprofile.username }}
+					</div>
+				</li>
+
+			{% if viewing_userprofile.option_show_email %}
+				<li>
+					<div class="form-heading">
+						email
+					</div>
+					<div class="form-data important-text">
+						{{ viewing_userprofile.user.email }}
+					</div>
+				</li>
+			{% endif %}
+
+			{% if viewing_userprofile.website %}
+				<li>
+					<div class="form-heading">
+						url
+					</div>
+					<div class="form-data important-text">
+						<a class="important-text underline" href="{{ viewing_userprofile.website }}">{{ viewing_userprofile.website }}</a>
+					</div>
+				</li>
+			{% endif %}
+
+				<li>
+					<div class="form-heading">
+						created
+					</div>
+					<div class="form-data important-text">
+						{{ viewing_userprofile.date_created|abbr_timesince }} ago
+					</div>
+				</li>
+
+			{% if viewing_userprofile.about %}
+				<li>
+					<div class="form-heading">
+						about
+					</div>
+					<div class="form-data important-text">
+						{{ viewing_userprofile.about|linebreaks }}
+					</div>
+				</li>
+			{% endif %}
+
+			</ul>
+		</div>
+
+	{% endifequal %}
+
+{% endblock %}
+

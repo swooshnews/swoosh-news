@@ -1,0 +1,65 @@
+{% extends "news/base.html" %}
+
+{% block title %}Guidelines{% endblock %}
+
+{% comment %}
+Page with guidelines for the site.
+{% endcomment %}
+
+{% load news_extras %}
+
+{% block content %}
+
+<div class="long-text important-text">
+
+    <p>The guidelines for Swoosh News are similar to <a
+    href="http://ycombinator.com/newsguidelines.html">those at Hacker
+    News</a>, except that Swoosh News is stricter.  All of the guidelines
+    from Hacker News apply, with a few additional guidelines listed
+    below.</p>
+
+    <p><em>Submissions</em></p>
+
+    <p>All submissions should be mentally stimulating to hackers.  It is
+    hard to describe exactly what this means, so I will provide some
+    examples. An article about Linux kernel internals will be favored over
+    an article about dropping Django.  An article about how to migrate
+    from Django to another framework will be favored over an article
+    describing the author's distaste for web-framework-of-the-week. An
+    article with hard facts will be favored over an article that is
+    generalizing. A link to interesting code will be favored over an
+    opinionated blog post. Almost anything will be favored over an
+    article from TechCrunch.</p>
+
+    <p>Submissions do not necessarily have to be related to computers
+    or technology, but they must be interesting and informative.
+    For example, an article containing rainfall percentages in South
+    America would be preferred over an article containing pictures from
+    a rainforest in South America.  Likewise, an article explaining or
+    comparing rainfall percentages in South America would be preferred
+    over an article just containing the percentages.</p>
+
+    <p><em>Comments</em></p>
+
+    <p>Just like submissions, comments should be interesting and
+    informative. They should be well thought-out. They should contain
+    links to further information where appropriate.  They should relate
+    the author's personal experiences if pertaining to the discussion.
+    A reader should gain some knowledge after reading any comment posted
+    on this site. </p>
+    
+    <p>Comments should not be a short quip.  Comments should not consist
+    entirely of a pun or a joke (jokes are fine, and even encouraged, as
+    long as they are accompanied by some informative content). Comments
+    should not be needlessly harsh, even if the author is convinced
+    they are right. Comments should not be a tangentially related
+    anecdotes. Comments should not be a "me too!" without adding any
+    informative content to the discussion.</p>
+
+
+
+
+
+</div>
+
+{% endblock %}

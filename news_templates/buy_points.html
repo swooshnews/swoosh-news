@@ -1,0 +1,71 @@
+
+{% extends "news/base.html" %}
+
+{% load news_extras %}
+
+{% block title %}Buy Comment Points{% endblock %}
+
+{% comment %}
+Buy some comment points.
+{% endcomment %}
+
+{% block content %}
+
+	{% if voting_error %}
+	<h3 class="posting-error">{{ voting_error }}</h3>
+	{% endif %}
+
+	<!--
+	<form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="get">
+		-->
+	<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="get">
+		<div class="stub basic-form">
+            <input type="hidden" name="cmd" value="_s-xclick" />
+            <input type="hidden" name="hosted_button_id" value="1055099" />
+            <input type="hidden" name="on0" value="Comment Points" />
+            <input type="hidden" name="custom" value="{{ user }}" />
+            <input type="hidden" name="currency_code" value="USD" />
+
+
+            <ul>
+                <li>
+                    <div class="form-heading">Comment Points</div>
+                    <select name="os0">
+                        {% for value, description in settings.NEWS_COMMENT_PRICES %}
+                            <option value="{{ value }}">{{ description }}</option>
+                        {% endfor %}
+
+                        <!--
+                        <option value="50">50 $0.50
+                        <option value="100">100 $1.00
+                        <option value="300">300 $3.00
+                        <option value="500">500 $5.00
+                        <option value="1000">1000 $10.00
+                        -->
+                    </select> 
+                </li>
+
+                <li>
+					<div class="form-heading">&nbsp;</div>
+                    <input class="form-data" type="submit" value="Buy with Paypal" />
+                </li>
+
+				<li>
+					<div class="form-heading">&nbsp;</div>
+					<div class="form-data unimportant-text" />
+                        You must buy comment points to submit comments and
+                        vote on comments. This is to reduce the amount of
+                        low quality comments and to encourage thoughtful,
+                        well-written comments. The cost to post comments
+                        and to vote on comments is included on the <a
+                        class="underline important-text" 
+                        href="{% url news.views.text.price %}">Price</a> 
+                        page.
+                    </div>
+				</li>
+            </ul>
+        </div>
+	</form>
+
+
+{% endblock %}

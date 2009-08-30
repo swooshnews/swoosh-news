@@ -1,0 +1,16 @@
+{% comment %}
+This is a small part of a page that asks if you want to delete 
+a rankable object.
+{% endcomment %}
+<div class="reply-box">
+    
+    <form action="{% url news.views.rankables.delete_rankable rankable.id %}?from={{ from_page }}" method="post">
+        <div>
+            Are you sure you want to delete this {% if rankable.is_comment %}comment{% endif %}{% if rankable.is_news_item %}news item{% endif %}?
+        </div>
+		<div class="submit-comment">
+			<input type="submit" name="submitvalue" value="yes" />
+			<input type="submit" name="submitvalue" value="no" />
+		</div>
+	</form>
+</div>

@@ -1,0 +1,52 @@
+
+{% extends "news/base.html" %}
+
+{% comment %}
+This is a template for a list of comments.  A good example is the list 
+of new comments, or news.views.comments.new_comments.
+{% endcomment %}
+
+{% load news_extras %}
+
+{% block title %}{{ header }}{% endblock %}
+
+{% block content %}
+	{% if latest_comments %}
+		{% for comment in latest_comments %}
+			<article class="stub">
+
+				<div class="number">
+					{% iflessthan forloop.counter0|add:paginator_page.start_index 10 %}&nbsp;{% endiflessthan %}{{ forloop.counter0|add:paginator_page.start_index }}.
+				</div>
+
+                {% if comment.dead %}
+                    <div class="dead">
+                        [dead]
+                    </div>
+                {% else %}
+                    {% with comment as rankable %}
+                        {% include "news/small_parts/arrows.html" %}
+                    {% endwith %}
+
+                    <div class="rankable-info">
+                        {% with "True" as long_comment_info %}
+                            {% include "news/small_parts/comment_info.html" %}
+                        {% endwith %}
+                    </div>
+                {% endif %}
+
+			</article>
+		{% endfor %}
+
+		{% if paginator_page.has_next %}
+		<div class="morelink">
+			<a class="important-text" href="{{ this }}?page={{ paginator_page.next_page_number }}">More</a>
+		</div>
+		{% endif %}
+
+	{% else %}
+	<article class="stub">
+		<p>No latest comments.</p>
+	</article>
+	{% endif %}
+{% endblock %}

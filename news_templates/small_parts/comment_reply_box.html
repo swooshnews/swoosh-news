@@ -1,0 +1,31 @@
+{% comment %}
+This is a small part of a page that implements a reply box.
+It uses the variables "comment_posting_error", "top_rankable",
+"comment_text".
+{% endcomment %}
+
+{% load news_extras %}
+
+<div class="reply-box">
+
+	{% if comment_posting_error %}
+	<h3 class="posting-error">Comment posting error: {{ comment_posting_error }}</h3>
+	{% endif %}
+
+	<form action="{% url news.views.comments.submit_comment %}" method="post">
+		<textarea name="comment_text" cols="60" rows="6">{{ comment_text }}</textarea>
+		<input type="hidden" value="{{ top_rankable.id }}" name="parent_id" />
+            {% if user.is_authenticated %}
+                {% ifnotcanpostcomment user.get_profile top_rankable %}
+                <p class="unimportant-text">You must buy more <a class="underline" href="{% url news.views.payment.buy_points %}">comment points</a> before you can post.</p>
+                {% endifnotcanpostcomment %}
+            {% endif %}
+        <p class="unimportant-text">
+		<div class="submit-comment">
+			<input type="submit" value="reply" />
+		</div>
+	</form>
+</div>
+
+		
+

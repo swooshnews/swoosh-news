@@ -1,0 +1,77 @@
+
+/******
+ * Users page and submit form.  This is calle "form.css", but it 
+ * also contains the layout for the basic (uneditable) user's page.
+ ******/
+
+.basic-form ul {
+	list-style-type: none;
+	padding: 0px;
+	clear: both;
+
+	/* this needs to be set */
+	width: 100%;
+	float: left;
+}
+
+.basic-form ul li {
+	/* this needs to be set */
+	width: 100%;
+	float: left;
+	
+	padding-bottom: 15px;
+}
+
+/* the heading on the form, such as the strings "title", "url", "text". 
+ * (for the news item submission form.) */
+.form-heading {
+	float: left;
+	text-align: right;
+
+	/* set to deal easily with different size texts and fonts */
+	min-width: 20%;
+
+	padding-right: 10px;
+}
+
+/* this is data on a form, such as email address, username, "about", etc
+ * (for the user form.) */
+div.form-data {
+	float: left;
+
+	/* see min-width above. 
+	 * this can't actually be 80% because of the 10px padding
+	 * from the .form-heading. */
+	max-width: 75%
+}
+
+div.form-data p {
+	margin-top: 0px;
+	margin-bottom: 8px;
+}
+
+
+input.submitbutton { 
+	margin-top: 10px;
+}
+
+/* this is used when picking between either submitting a news item
+ * with a url, or with some text. */
+div.submission-one-or-other {
+	padding-top: 20px;
+	padding-bottom: 10px;
+	width: 100%;
+	float: left;
+}
+div.submission-one-or-other li {
+	padding-bottom: 0px;
+}
+
+/* this is the actual "or" that goes between the url and text */
+.big-or {
+	float: left;
+	width: 100%;
+	font-weight: bold;
+}
+
+

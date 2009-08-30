@@ -1,0 +1,20 @@
+{% comment %}
+This is a small part of a page that implements a comment edit box.
+It uses the variables "comment_posting_error",
+"comment_text", and "comment".
+{% endcomment %}
+
+
+<div class="reply-box edit-box">
+
+	{% if comment_posting_error %}
+	<h3 class="posting-error">Comment posting error: {{ comment_posting_error }}</h3>
+	{% endif %}
+
+    <form action="{% url news.views.comments.edit_comment comment.id %}?from={{ from_page }}" method="post">
+		<textarea name="comment_text" cols="60" rows="6">{# comment_text is set on error, so that is what gets to be the default #}{% if comment_text %}{{ comment_text }}{% else %}{{ comment.text }}{% endif %}</textarea>
+		<div class="submit-comment">
+			<input type="submit" value="reply" />
+		</div>
+	</form>
+</div>

@@ -1,0 +1,45 @@
+
+{% comment %}
+This used to include basic info about a comment.
+It uses the variable comment.
+
+This is used in a list of comments (not threaded), 
+and when replying to a comment.
+{% endcomment %}
+
+{% load news_extras %}
+
+<div class="unimportant-text">
+
+	{{ comment.rating }} point{{ comment.rating|pluralize}}
+
+	by <a href="{% url news.views.users.user comment.poster.username %}">{{ comment.poster.username }}</a> 
+
+	{{ comment.date_posted|abbr_timesince }} ago |
+
+	<a href="{% url news.views.comments.comment comment.id %}">link</a>
+
+    {% if long_comment_info %}
+        {% if comment.parent.is_comment %}
+            | <a href="{% url news.views.comments.comment comment.parent.id %}">
+        {% else %}
+            | <a href="{% url news.views.news_items.news_item comment.parent.id %}">
+        {% endif %}
+        parent</a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        {% ifeditrankable comment user.get_profile %}
+            | <a href="{% url news.views.comments.edit_comment comment.id %}?from={{ next }}">edit</a> 
+            | <a href="{% url news.views.rankables.delete_rankable comment.id %}?from={{ next }}">delete</a> 
+        {% endifeditrankable %}
+    {% endif %}
+
+    {% if  long_comment_info %}
+        | on: <a href="{% url news.views.news_items.news_item comment.get_newsitem.id %}">{{ comment.get_newsitem.title }}</a> 
+    {% endif %}
+
+</div>
+<div class="important-text">
+	{{ comment.text|linebreaks }}
+</div>

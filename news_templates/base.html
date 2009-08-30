@@ -1,0 +1,217 @@
+{# Just the base template.  Nothing exciting. #}
+
+{% url news.views.news_items.new_news_items as new_news_items_url %}
+{% url news.views.comments.new_comments as new_comments_url %}
+{% url news.views.news_items.submit as submit_url %}
+{% url news.views.payment.buy_points as buy_points_url %}
+{% url news.views.text.about as about_url %}
+{% url news.views.text.guidelines as guidelines_url %}
+{% url news.views.text.faq as faq_url %}
+{% url news.views.text.bookmarklet as bookmarklet_url %}
+{% url news.views.text.price as price_url %}
+{% url news.views.payment.success as success_url %}
+{% url news.views.payment.cancel as cancel_url %}
+
+{% if user.is_authenticated %}
+	{% url news.views.users.user user.username as user_url %}
+{% endif %}
+
+{# extras #}
+{% if comment %}
+	{% url news.views.comments.comment comment.id as comment_url %}
+	{% url news.views.comments.edit_comment comment.id as edit_comment_url %}
+	{% url news.views.rankables.delete_rankable comment.id as delete_rankable_url %}
+{% endif %}
+{% if top_comment %}
+	{% url news.views.comments.comment top_comment.id as comment_url %}
+	{% url news.views.comments.edit_comment top_comment.id as edit_comment_url %}
+	{% url news.views.rankables.delete_rankable top_comment.id as delete_rankable_url %}
+{% endif %}
+{% if news_item %}
+	{% url news.views.news_items.news_item news_item.id as news_item_url %}
+	{% url news.views.rankables.delete_rankable news_item.id as delete_rankable_url %}
+{% endif %}
+{% if top_news_item %}
+	{% url news.views.news_items.news_item top_news_item.id as news_item_url %}
+	{% url news.views.rankables.delete_rankable top_news_item.id as delete_rankable_url %}
+{% endif %}
+
+{% load news_extras %}
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Swoosh News | {% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="/media/news_media/css/master.css" type="text/css" />
+		<link rel="stylesheet" href="/media/news_media/css/nav-title-footer.css" type="text/css" />
+		<link rel="stylesheet" href="/media/news_media/css/form.css" type="text/css" />
+		<link rel="stylesheet" href="/media/news_media/css/list.css" type="text/css" />
+		<link type="image/x-icon" href="/favicon.ico" rel="icon" 
+			sizes="16x16 32x32 64x64 128x128" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="container-for-everything">
+
+			<div class="header-and-nav">
+
+				<header>
+					<a href="{% url news.views.news_items.index %}">Swoosh News</a>
+				</header>
+
+				<nav>
+					<ul class='general-links'>
+
+						<li>
+							<a href="{{ new_news_items_url }}"><span {% ifurlpathequal request.path new_news_items_url %}class="selected-nav-link"{% endifurlpathequal %} >new</span></a>
+						</li>
+
+						<li>
+							<a href="{{ new_comments_url }}"><span {% ifurlpathequal request.path new_comments_url %}class="selected-nav-link"{% endifurlpathequal %} >comments</span></a>
+						</li>
+
+						<li>
+							<a href="{{ submit_url }}"><span {% ifurlpathequal request.path submit_url %}class="selected-nav-link"{% endifurlpathequal %} >submit</span></a>
+						</li>
+
+						{% if edit_comment_url %}
+							{% ifurlpathequal request.path edit_comment_url %}
+							<li>
+                            <a href="{{ edit_comment_url }}?from={{ from_page }}"><span class="selected-nav-link">edit</span></a>
+							</li>
+							{% endifurlpathequal %}
+						{% endif %}
+
+						{% if delete_rankable_url %}
+							{% ifurlpathequal request.path delete_rankable_url %}
+							<li>
+                            <a href="{{ delete_rankable_url }}?from={{ from_page }}"><span class="selected-nav-link">delete</span></a>
+							</li>
+							{% endifurlpathequal %}
+						{% endif %}
+
+                        {% comment %}
+                            {% if comment_url %}
+                                {% ifurlpathequal request.path comment_url %}
+                                <li>
+                                <a href="{{ comment_url }}"><span class="selected-nav-link">comment</span></a>
+                                </li>
+                                {% endifurlpathequal %}
+                            {% endif %}
+
+                            {% if news_item_url %}
+                                {% ifurlpathequal request.path news_item_url %}
+                                <li>
+                                <a href="{{ news_item_url }}"><span class="selected-nav-link">news item</span></a>
+                                </li>
+                                {% endifurlpathequal %}
+                            {% endif %}
+                        {% endcomment %}
+
+						{% if about_url %}
+							{% ifurlpathequal request.path about_url %}
+							<li>
+                            <a href="{{ about_url }}"><span class="selected-nav-link">about</span></a>
+							</li>
+							{% endifurlpathequal %}
+						{% endif %}
+
+						{% if guidelines_url %}
+							{% ifurlpathequal request.path guidelines_url %}
+							<li>
+                            <a href="{{ guidelines_url }}"><span class="selected-nav-link">guidelines</span></a>
+							</li>
+							{% endifurlpathequal %}
+						{% endif %}
+
+						{% if faq_url %}
+							{% ifurlpathequal request.path faq_url %}
+							<li>
+                            <a href="{{ faq_url }}"><span class="selected-nav-link">faq</span></a>
+							</li>
+							{% endifurlpathequal %}
+						{% endif %}
+
+						{% if bookmarklet_url %}
+							{% ifurlpathequal request.path bookmarklet_url %}
+							<li>
+                            <a href="{{ bookmarklet_url }}"><span class="selected-nav-link">bookmarklet</span></a>
+							</li>
+							{% endifurlpathequal %}
+						{% endif %}
+
+						{% if price_url %}
+							{% ifurlpathequal request.path price_url %}
+							<li>
+                            <a href="{{ price_url }}"><span class="selected-nav-link">price</span></a>
+							</li>
+							{% endifurlpathequal %}
+						{% endif %}
+
+						{% if success_url %}
+							{% ifurlpathequal request.path success_url %}
+							<li>
+                            <a href="{{ success_url }}"><span class="selected-nav-link">success</span></a>
+							</li>
+							{% endifurlpathequal %}
+						{% endif %}
+
+						{% if cancel_url %}
+							{% ifurlpathequal request.path cancel_url %}
+							<li>
+                            <a href="{{ cancel_url }}"><span class="selected-nav-link">cancel</span></a>
+							</li>
+							{% endifurlpathequal %}
+						{% endif %}
+
+					</ul>
+					<ul class="user-links">
+
+						{% if user.is_authenticated %}
+
+							<li>
+								<a href="{{ user_url }}"><span {% ifurlpathequal request.path user_url %}class="selected-nav-link"{% endifurlpathequal %} >{{ user.username }}</span></a>
+								<a href="{{ buy_points_url }}">(<span {% ifurlpathequal request.path buy_points_url %}class="selected-nav-link"{% endifurlpathequal %} >{{ user.get_profile.comment_points }}</span>)</a>
+							</li>
+
+							<li><a href="{% url news.views.login.logout_view %}?next={{ next }}">
+								logout</a></li>
+
+						{% else %}
+
+							<li><a href="{% url news.views.login.login_view %}?next={{ next }}">
+								login</a></li>
+
+						{% endif %}
+					</ul>
+				</nav>
+			</div>
+
+			<section>
+				{% block content %}{% endblock %}
+			</section>
+
+			<footer>
+				<hr />
+				<div>
+					<ul>
+                        <li><a href="{{ about_url }}">About</a></li>
+                        <li><a href="{{ guidelines_url }}">Guidelines</a></li>
+						<li><a href="{{ faq_url }}">FAQ</a></li>
+						<li><a href="{{ bookmarklet_url }}">Bookmarklet</a></li>
+						<li><a href="{{ price_url }}">Price</a></li>
+						<li>Source</li>
+						<li>Feature Reqests</li>
+					</ul>
+				</div>
+			</footer>
+		</div>
+
+	</body>
+</html>
+

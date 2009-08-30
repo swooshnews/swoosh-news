@@ -1,0 +1,34 @@
+
+{% extends "news/base.html" %}
+
+{% comment %}
+This is a template for deleting a comment or news item.
+{% endcomment %}
+
+{% load news_extras %}
+
+{% block title %}Delete {% if comment %}Comment{% endif %}{% if news_item %}News Item{% endif %}{% endblock %}
+
+{% block content %}
+
+	<div class="stub">
+        {% include "news/small_parts/arrows.html" %}
+
+		<div class="rankable-info">
+            {% if comment %}
+                {% with "True" as long_comment_info %}
+                    {% include "news/small_parts/comment_info.html" %}
+                {% endwith %}
+            {% endif %}
+
+            {% if news_item %}
+                {% include "news/small_parts/news_item_info.html" %}
+            {% endif %}
+
+            {% include "news/small_parts/question_delete.html" %}
+
+		</div>
+
+	</div>
+
+{% endblock %}

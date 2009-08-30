@@ -1,0 +1,56 @@
+{% extends "news/base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% comment %}
+About Page.
+{% endcomment %}
+
+{% load news_extras %}
+
+{% block content %}
+
+<div class="long-text important-text">
+
+    <p>Swoosh News is a community-oriented, social
+    news website with content that hackers might
+    find interesting.  It is based on and modeled after <a
+    href="http://news.ycombinator.com">Hacker News</a>. Hacker News is an
+    <a href="http://ycombinator.com/newswelcome.html">experiment</a> with
+    a goal to create a community site that will not decline in quality as
+    it becomes popular.  Their hypothesis is that by making a conscious
+    effort to resist decline, they can keep it from happening.</p>
+
+    <p>I am a long time reader of Hacker News.  My oldest account is
+    from late 2007, but I started lurking a few months before that.  For
+    myself and many others, Hacker News has not met its goal of keeping
+    its high standard.  As it gets more popular, the signal-to-noise
+    ratio continues to fall, and it is beginning to devolve into <a
+    href="http://www.reddit.com/r/programming">Proggit</a>.  The quality
+    of comments has particularly gone down hill. In an effort to create a
+    site that could become popular while still meeting this high standard,
+    I created Swoosh News.</p>
+
+    <p>Swoosh News is based on Hacker News (even the layout!), but it
+    has one main difference.  At Swoosh News, it costs money to post
+    comments and to vote on comments.  The cost to post a comment and
+    vote is included on the <a href="{% url news.views.text.price %}">
+    Price</a> page. With this small barrier of entry, I hope to keep the
+    quality of comments high, regardless of how popular the site gets.</p>
+
+    <p>What is 'high quality' with regard to comments? A high quality
+    comment is one that is both concise and informative. It is well
+    thought-out, it probably contains links to further information, it
+    might contain an explanation of a confusing point in the original
+    article, it might be a highly relevant personal experience.
+    On the other hand, it does not contain any puns, it is not overly
+    critical, it is not a one-word quip, and it is not a random personal
+    experience.  Look at the <a href="{% url news.views.text.guidelines %}">Guidelines</a>
+    for more information.</p>
+
+    <p>The goal of Swoosh News is to be like Hacker News on <a href="http://erlanginside.com/hacker-news-full-of-erlang-articles-80">Erlang days</a>.</p>
+
+    <p>You can reach me at [swoosh dot news at gmail dot com] with
+    questions, complaints, praise, etc.</p>
+</div>
+{% endblock %}

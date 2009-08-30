@@ -1,0 +1,100 @@
+
+Q. What session variables are set?
+
+A. Session variables  are mainly used two places--posting news items
+and posting comments.  They are always used because some sort of error
+occurred, either there was an input error or the user was not logged in.
+Session variables are mainly used for the following reason.  There are
+two views, view_A and view_B.  view_A produces a form which submits
+information to view_B.  view_B processes the information and sends a
+redirect back to view_A. But, if there is an error in processing the
+information, view_B needs some way to send the information back to view_A.
+So, view_B puts the info in session variables and redirects to view_A.
+view_A always trys to read these session variables by default.
+
+
+The following is a comprehensive list on what views read and write
+session variables:
+
+
+views/comments.py 
+----------------- 
+	comment() view:
+		* reads comment_posting_error, comment_text, and 
+		  comment_text_for_id. When there is an error posting a comment 
+		  (the use was not logged in or the comment_text is not valid), 
+		  these session variables are set.
+
+	submit_comment() view:
+		* When the comment is not valid, sets comment_posting_error, 
+		  and comment_text_for_id.  Then reloads 
+		  either the news item view or comment view that came to 
+		  this submit_comment view.  When the user is not logged 
+		  in, it sets comment_text and comment_text_for_id.  
+		  It then sends the user to the login view.  The login view reads 
+		  these values from the "anonymous" user, logins in the normal 
+		  user, and then puts these values into the normal user's session.
+
+
+views/login.py
+--------------
+	login_view() view:
+		* on error logging in, it sets login_error and login_username
+		* when called as a GET, it reads from login_error, login_username,
+		  create_account_error, and create_account_username (but really, 
+		  either the login vars or the create_account vars should be set.
+		  if both of them are set, something is screwed up).
+		* when calling login() for a user, it reads comment_text,
+		  comment_text_for_id, submit_title, submit_url,
+		  and submit_text. It then logs in the user (which clears the 
+		  session variables), and then sets all these variables for 
+		  the logged in user.  This is really just a hack.
+
+	create_account() view:
+		* on error creating a user, create_account_username and 
+		  create_account_error are set.
+
+	change_password() view:
+		* on error, change_password_error is set.
+		* when loaded as a GET, change_password_error is passed to the template.
+
+views/news_items.py
+------------------
+	news_item() view:
+		* reads comment_posting_error, comment_text, 
+		  and comment_text_for_id.  It sets the correct comment text
+		  in the news item page if it finds these session variables.
+		  These variables are set if there was some error on posting
+		  a comment to a news item.
+
+	submit() view:
+		* reads submit_title, submit_text, submit_url, and submission_error 
+		  if called as a GET request. (These should have been set on a 
+		  posting error).
+		* If the user is not authenticated, it sets the submit_title,
+		  submit_text, and submit_url session variables and sends the
+		  user to login.
+		* If the submission is not valid, it sets submit_title, submit_text,
+		  submit_url, and submission_error.
+
+view/users.py
+-------------
+	user() view:
+		* on error in url, email address, or about section, sets
+		  userprofile_posting_error, userprofile_email, userprofile_website,
+		  and userprofile_about.
+		* It reads these values when processing a GET request.
+
+
+views/voting.py
+---------------
+    vote() view:
+        * the user tries to vote on a Rankable and they do not have enough
+          comment points to do so, they are sent to view.payment.buy_points
+          and the session variable voting_error is set.
+
+
+views/payment.py
+----------------
+    buy_points() view:
+        * voting_error is read from the session.

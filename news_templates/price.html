@@ -1,0 +1,71 @@
+
+{% extends "news/base.html" %}
+
+{% block title %}Price{% endblock %}
+
+{% comment %}
+Comment posting and voting price page.
+{% endcomment %}
+
+{% load news_extras %}
+
+{% block content %}
+
+<div class="important-text">
+
+
+{% with settings.NEWS_COMMENT_PTS_PER_DOL|float_divide:settings.NEWS_COST_RESPOND_NEWS_ITEM as respond_ni_amt_per_dollar %}
+{% with settings.NEWS_COMMENT_PTS_PER_DOL|float_divide:settings.NEWS_COST_RESPOND_ASK_SN as respond_ask_sn_amt_per_dollar %}
+{% with settings.NEWS_COMMENT_PTS_PER_DOL|float_divide:settings.NEWS_COST_VOTE_NORMAL_COMMENT as vote_normal_com_amt_per_dollar %}
+{% with settings.NEWS_COMMENT_PTS_PER_DOL|float_divide:settings.NEWS_COST_VOTE_ASK_SN_COMMENT as vote_ask_sn_com_amt_per_dollar %}
+{% with settings.NEWS_COMMENT_PTS_PER_DOL|float_divide:settings.NEWS_COST_VOTE_NEWS_ITEM as vote_ni_amt_per_dollar %}
+{% with settings.NEWS_COMMENT_PTS_PER_DOL|float_divide:settings.NEWS_COST_VOTE_ASK_SN as vote_ask_sn_amt_per_dollar %}
+
+<table summary="Prices for posting comments and voting">
+    <tr>
+        <th></th>
+        <th>Cost (Comment Points)</th>
+        <th>Cost (Dollars--Approximate)</th>
+    </tr>
+    <tr>
+        <th>Post Comment to Regular News Item</th>
+        <td>{{ settings.NEWS_COST_RESPOND_NEWS_ITEM }}</td>
+        <td>${{ 1.00|float_divide:respond_ni_amt_per_dollar }}</td>
+    </tr>
+    <tr>
+        <th>Post Comment to "Ask SN:" News Item</th>
+        <td>{{ settings.NEWS_COST_RESPOND_ASK_SN }}</td>
+        <td>${{ 1.00|float_divide:respond_ask_sn_amt_per_dollar }}</td>
+    </tr>
+    <tr>
+        <th>Vote on Comment to Regular News Item</th>
+        <td>{{ settings.NEWS_COST_VOTE_NORMAL_COMMENT }}</td>
+        <td>${{ 1.00|float_divide:vote_normal_com_amt_per_dollar }}</td>
+    </tr>
+    <tr>
+        <th>Vote on Comment to "Ask SN:" News Item</th>
+        <td>{{ settings.NEWS_COST_VOTE_ASK_SN_COMMENT }}</td>
+        <td>${{ 1.00|float_divide:vote_ask_sn_com_amt_per_dollar }}</td>
+    </tr>
+    <tr>
+        <th>Vote on Regular News Item</th>
+        <td>{{ settings.NEWS_COST_VOTE_NEWS_ITEM }}</td>
+        <td>${{ 1.00|float_divide:vote_ni_amt_per_dollar }}</td>
+    </tr>
+    <tr>
+        <th>Vote on "Ask SN:" News Item</th>
+        <td>{{ settings.NEWS_COST_VOTE_ASK_SN }}</td>
+        <td>${{ 1.00|float_divide:vote_ask_sn_amt_per_dollar }}</td>
+    </tr>
+</table>
+
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+
+</div>
+
+{% endblock %}

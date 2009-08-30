@@ -1,0 +1,25 @@
+{% extends "news/base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% comment %}
+About Page.
+{% endcomment %}
+
+{% load news_extras %}
+
+{% block content %}
+
+<div class="long-text important-text">
+
+    <p>Your payment is being processed.  Paypal will contact
+    Swoosh News with your payment status shortly. The comment points will
+    then be added to your account.  This should all happen in a matter
+    of seconds.  If there is an error, it may delay the comment points
+    being added to your account.  If this happens, you should go to your
+    {% if user.is_authenticated %}<a href="{% url news.views.users.user user.username %}"> user page</a>{% else %}user page{% endif %} and
+    input your email address.  That way I can contact you.  If you have
+    any problems or questions, you can reach me at [swoosh dot news at
+    gmail dot com].
+</div>
+{% endblock %}

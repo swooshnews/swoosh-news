@@ -1,0 +1,59 @@
+
+{% extends "news/base.html" %}
+
+{% block title %}Submit{% endblock %}
+
+{% comment %}
+Page for submitting a new news item.
+{% endcomment %}
+
+{% block content %}
+
+	{% if submission_error %}
+	<h3 class="posting-error">{{ submission_error }}</h3>
+	{% endif %}
+
+	<form action="{% url news.views.news_items.submit %}" method="post">
+		<div class="stub basic-form">
+			<ul>
+				<li>
+					<label class="form-heading" for="title">title</label>
+					<input class="form-data important-text" id="title" name="title" size="50" maxlength="{{ settings.NEWS_MAX_TITLE_LENGTH }}" type="text" value="{{ title }}" />
+				</li>
+
+				<div class="submission-one-or-other">
+					<li>
+						<label class="form-heading" for="url">url</label>
+						<input class="form-data important-text" id="url" name="url" size="50" maxlength="{{ settings.NEWS_MAX_URL_LENGTH }}" type="text" value="{{ url }}" />
+					</li>
+
+					<li class="big-or">
+						<div class="form-heading">&nbsp;</div>
+						<div class="form-data important-text">or</div>
+					</li>
+
+					<li>
+						<label class="form-heading" for="text">text</label>
+						<textarea class="form-data important-text" id="text" name="text" cols="50" rows="4">{{ text }}</textarea>
+					</li>
+				</div>
+
+				<li>
+					<div class="form-heading">&nbsp;</div>
+					<input class="submitbutton form-data important-text" type="submit" value="submit" />
+				</li>
+				<li>
+					<div class="form-heading">&nbsp;</div>
+					<div class="form-data unimportant-text" />
+                        You may submit a title and a URL, or a title and
+                        text. When submitting a title and text, everyone
+                        will be able to participate in the discussion,
+                        not just those with comment points.
+                    </div>
+				</li>
+			</ul>
+		</div>
+	</form>
+
+{% endblock %}
+

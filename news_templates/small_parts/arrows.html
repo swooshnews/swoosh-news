@@ -1,0 +1,33 @@
+
+{% comment %}
+This small, includable file just specifies the voting arrows.
+It uses the variable 'rankable' and 'next'.
+{% endcomment %}
+
+{% load news_extras %}
+
+<div class="arrows">
+    {% if not user.is_authenticated %}
+        <a href="{% url news.views.voting.vote %}?id={{ rankable.id }}&amp;direction=up&amp;next={{ next }}">
+        <img src="/media/news_media/img/uparrow.gif" alt="vote up" /></a>
+
+        {% if rankable.can_be_downvoted %}
+        <a href="{% url news.views.voting.vote %}?id={{ rankable.id }}&amp;direction=down&amp;next={{ next }}">
+        <img src="/media/news_media/img/downarrow.gif" alt="vote down" /></a>
+        {% endif %}
+
+    {% else %}
+        {% ifnotalreadyvoted rankable user.get_profile %}
+            <a href="{% url news.views.voting.vote %}?id={{ rankable.id }}&amp;direction=up&amp;next={{ next }}">
+            <img src="/media/news_media/img/uparrow.gif" alt="vote up" /></a>
+
+            {% if rankable.can_be_downvoted %}
+            <a href="{% url news.views.voting.vote %}?id={{ rankable.id }}&amp;direction=down&amp;next={{ next }}">
+            <img src="/media/news_media/img/downarrow.gif" alt="vote down" /></a>
+            {% endif %}
+        {% else %}
+            <img src="/media/news_media/img/noarrow.gif" alt="already voted" /></a>
+        {% endifnotalreadyvoted %}
+
+    {% endif %}
+</div>

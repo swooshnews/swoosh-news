@@ -1,0 +1,29 @@
+
+{% extends "news/base.html" %}
+
+{% comment %}
+This is a template for editing a comment.
+{% endcomment %}
+
+{% load news_extras %}
+
+{% block title %}Edit Comment{% endblock %}
+
+{% block content %}
+
+	<div class="stub">
+		{% with comment as rankable %}
+			{% include "news/small_parts/arrows.html" %}
+		{% endwith %}
+
+		<div class="rankable-info">
+            {% with "True" as long_comment_info %}
+                {% include "news/small_parts/comment_info.html" %}
+            {% endwith %}
+
+			{% include "news/small_parts/comment_edit_box.html" %}
+		</div>
+
+	</div>
+
+{% endblock %}

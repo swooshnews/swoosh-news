@@ -1,0 +1,43 @@
+* figure out when to update the rankings
+	* There's also a background reranking thread to rerank a
+	  random story from the top 50 every 30 seconds (again using
+	  adjust-rank). This ensures that stories that are no longer
+	  receiving any votes at all get reranked occasionally.
+	* I have news/scripts/update_ranking.py, I just need to set it on a 
+	  cron job
+
+* write remaining tests
+* write readme (make sure to add bit about symlinks)
+
+* with paginator, I need a more sensible way to work 'this' and 'next'.
+  (look at the index view...)
+  - The reason it is weird is because of the two argruments I have:
+    "next=..." and "page=...".
+  - use middleware to give me a request.this for pointing to the view we
+    are going for?
+* make user be able to define how many objects to view on their front page
+* add markup to comments
+* eventually have superuser functionality
+* make sure comments can't be nested by more than 5
+* provide signals for every useful action in my application
+* make sure i'm okay with CSRF
+  http://docs.djangoproject.com/en/1.0/ref/contrib/csrf/
+  http://news.ycombinator.com/item?id=780882
+* add rss
+* make rankables be able to be pulled up again by a surge of recent votes
+	* maybe only count the votes that happen in the past two weeks?
+	* look at post_save callback?
+	* http://news.ycombinator.com/item?id=717249
+	* what about ranking by the RECENT votes (only votes made in last... month?)
+	* direction for rated should be 1 or -1, that way we just sum up a list
+* I might have to use the never-cache decorator on my login view if I ever use caching
+* put all the <meta> tags I need in base.html (e.g. <meta ... name="robots", name="author",
+  name="description" ... >
+* I might need to escape urls from the & with using {% filter... %}
+  Or maybe like this: {% url path.to.view arg, arg2 as the_url %}
+* make sure that when I reply to a comment (not a news item), I get sent back to 
+  the news item page.
+* do javascript.
+* add google checkout and amazon fps
+* give someone points for getting their comment voted up.
+* people get points back after being voted on

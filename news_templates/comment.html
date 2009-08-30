@@ -1,0 +1,42 @@
+
+{% extends "news/base.html" %}
+
+{% comment %}
+This is a template for a list of news items.  A good example is the frontpage view,
+or news.views.news_items.index
+{% endcomment %}
+
+{% load news_extras %}
+
+{% block title %}{{ header }}{% endblock %}
+
+{% block content %}
+
+	<div class="stub">
+        {% if top_comment.dead %}
+            <div class="dead">
+                [dead]
+            </div>
+        {% else %}
+            {% with top_comment as rankable %}
+                {% include "news/small_parts/arrows.html" %}
+            {% endwith %}
+
+            <div class="rankable-info">
+                {% with top_comment as comment %}
+                    {% with "True" as long_comment_info %}
+                        {% include "news/small_parts/comment_info.html" %}
+                    {% endwith %}
+                {% endwith %}
+
+                {% with top_comment as top_rankable %}
+                    {% include "news/small_parts/comment_reply_box.html" %}
+                {% endwith %}
+            </div>
+        {% endif %}
+
+	</div>
+
+	{% include "news/small_parts/threaded_comment_list.html" %}
+
+{% endblock %}

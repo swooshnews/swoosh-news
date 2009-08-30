@@ -1,0 +1,127 @@
+
+/*************************************
+ *** NAVIGATION, TITLE, and FOOTER ***
+ *************************************/
+
+div.header-and-nav {
+	background-color: #1111FF;
+	color: black;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	width: 100%;
+
+	/* this must be floated so that it will expand to contain it's (floated) 
+	 * children. */
+	float: left;
+}
+
+header, header a {
+	background-color: transparent;
+	color: inherit;
+	font-weight: bold;
+	padding-left: 8px;
+	padding-right: 8px;
+
+	/* This puts it to the left and makes it only as wide as it needs to be. */
+	float: left;
+	width: auto;
+}
+
+nav ul {
+	/* this keeps the ul margin (top and bottom) from being too wide */
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-left: 0px;
+}
+
+nav ul.general-links {
+	float: left;
+}
+
+nav ul.user-links {
+	float: right;
+}
+
+nav ul li {
+	/* this takes away the bullet points */
+	display: inline;
+
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+nav ul li a {
+	/* unselected nav link */
+	color: inherit;
+}
+
+.selected-nav-link {
+	color: white;	
+}
+
+
+
+/****************************
+ ********* FOOTER ***********
+ ****************************/
+
+footer {
+	color: black;
+	float: left;
+}
+
+footer hr {
+	/* Both of these are needed to work correctly on all browsers */
+	color: #1111FF;
+	background-color: #1111FF;
+
+	border: 0px;
+	margin: 0px;
+	margin-top: 10px;
+}
+
+/* this is a hack to get the menu centered:
+ * http://matthewjamestaylor.com/blog/beautiful-css-centered-menus-no-hacks-full-cross-browser-support */
+footer div {
+	/* everything has been floated, so this probably should, too */
+	float: left;
+	width: 100%;
+
+	/* we will move the ul 50% of the way to the right, and then move the 
+	 * li's 50% of the way back to the left, thereby centering them inside
+	 * this div.  the problem is that the ul will go off the side of the
+	 * screen if the ul is too wide.  this overflow hack stops that from 
+	 * happening. */
+	overflow: hidden;
+}
+
+footer ul {
+	padding: 0px;
+	text-align: center;
+
+	/* make sure there are no bullet points */
+	list-style-type: none;
+
+	/* this is part of the hack. float it 50% across the page.
+	 * it is relative because it is 50% across the containing
+	 * element (which, in this case, is the footer) */
+	float: left;
+	left: 50%;
+	position: relative;
+
+	/*width: 100%;*/
+}
+
+footer ul li {
+	/* just like above, we now have to float it back 50%,
+	 * which, since it's relative, puts it in the center 
+	 * of the page. neat. */
+	float: left;
+	right: 50%;
+	position: relative;
+
+	
+	padding-left: 20px;
+	padding-right: 20px;
+	
+}

@@ -1,0 +1,30 @@
+
+{% comment %}
+This used to include basic info about a news item.
+It uses the variable "news_item" and "full_news_item"
+{% endcomment %}
+
+{% load news_extras %}
+
+<div class="news-item-title-and-link">
+	{% if news_item.url %}
+	<a href="{{ news_item.url }}" class="no-underline important-text {% if full_news_item %}{% else %}unimportant-if-visited{% endif %}">{{ news_item.title }}</a>
+		({{ news_item.abbr_url }})
+	{% else %}
+	<a href="{% url news.views.news_items.news_item news_item.id %}" class="no-underline important-text {% if full_news_item %}{% else %}unimportant-if-visited{% endif %}">{{ news_item.title }}</a>
+	{% endif %}
+</div>
+<div class="unimportant-text">
+	{{ news_item.rating }} point{{ news_item.rating|pluralize}} by 
+	<a href="{% url news.views.users.user news_item.poster.username %}">{{ news_item.poster.username }}</a> 
+	{{ news_item.date_posted|abbr_timesince }} ago |
+    {% if news_item.dead %} <em>dead</em> | {% endif %}
+	<a href="{% url news.views.news_items.news_item news_item.id %}">{{ news_item.num_child_comments }} comment{{ news_item.num_child_comments|pluralize }}</a>
+</div>
+{% if full_news_item %}
+	{% if news_item.is_ask_sn %}
+		<div class="important-text">
+			{{ news_item.text|linebreaks }}
+		</div>
+	{% endif %}
+{% endif %}

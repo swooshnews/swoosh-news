@@ -1,0 +1,48 @@
+
+/****************************
+ * Elements that are common between many html files.
+ * (ex, arrows, numbering, etc.)
+ ****************************/
+
+
+/****
+ * Number from paginator list which is used in flat-lists
+ * like new comment list and new news item list.
+ ****/
+div.number {
+
+	/* it messes up without this */
+	float: left;
+
+	/* these next two are so that it is formatted correctly with the number */
+	text-align: right;
+
+	/* this is specifically set to min-width to deal well with page resizing
+	 * and different text sizes.  the arrows are also set to a min width, while
+	 * the title and link information have a max width set. */
+	min-width: 4%;
+}
+
+/**** 
+ * Arrow for voting up/down. 
+ ****/
+div.arrows {
+	float: left;
+	padding-left: 1px;
+	padding-right: 4px;
+
+	/* see min-width from div.number */
+	min-width: 2%;
+}
+div.arrows a img {
+	/* no blue border around the arrows */
+	border-style: none;
+
+	/* arrows are stacked above each other 
+	 * and centered inside the div */
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+
+	padding-bottom: 1px;
+}

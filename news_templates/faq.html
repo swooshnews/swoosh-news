@@ -1,0 +1,78 @@
+{% extends "news/base.html" %}
+
+{% block title %}FAQ{% endblock %}
+
+{% comment %}
+FAQ for Swoosh News
+{% endcomment %}
+
+{% load news_extras %}
+
+{% block content %}
+
+<div class="long-text important-text">
+
+	<p class="faq-question">Why did you start this site?</p>
+
+	<p class="faq-answer">I really like <a
+	href="http://news.ycombinator.com">Hacker News</a>, but I feel
+	like the quality of the site has been going downhill.  The most
+	obvious change is in the quality of comments. Hacker News is
+	starting to turn into Reddit.</p> <p class="faq-answer">So,
+	I created Swoosh News.</p>
+
+
+	<p class="faq-question">Any other reasons?</p>
+
+	<p class="faq-answer">I wanted some experience with web
+	development.  Before creating Swoosh News, I had never done
+	any serious work with web programming, CSS, or Javascript.
+	I feel like I have really learned a lot from hacking on Swoosh News!</p>
+
+
+	<p class="faq-question">Tell me more about the code.<p>
+
+	<p class="faq-answer">The site is coded in
+	<a href="http://python.org">Python</a> using <a
+	href="http://www.djangoproject.com/">Django</a>. The site is
+	being hosted at <a href="http://prgmr.com/">prgmr.com</a>.
+	It is currently running off of an <a
+	href="http://sqlite.org/">SQLite</a> database.<!-- TODO: add
+	source here --> The source code is up at GitHub. Everything
+	is there, including the Python and Django code, the templates,
+	and the CSS.  The only thing not posted online is my (Django)
+	settings.py file, and the database.</p>
+
+
+	<p class="faq-question">Why are you charging money for people
+	to post comments?</p>
+
+	<p class="faq-answer">I hope this encourages people to post high
+	quality comments--thoughtful, insightful comments--instead of
+	quick one-liners.  I will do whatever it takes to keep the quality
+	of comments high on SN, even if this includes raising the comment
+	fee, lowering the comment fee, or abolishing it all together.</p>
+
+
+	<p class="faq-question">Why did you choose Paypal as your
+	payment processor?  Why not go with a merchant account?</p>
+
+	<p class="faq-answer">There is not enough volume to justify
+	using a payment processor.  It is cheaper to go with Paypal.
+	Also, it should be more convenient for most people.  You do
+	not have to trust this site with your credit card information,
+	you need only to trust Paypal.	In the future, there are plans
+	to add Google Checkout and Amazon FPS, as well.</p>
+
+
+	<p class="faq-question">What can I do if I have a problem with...?</p>
+
+	<p class="faq-answer">Please email me at [swoosh dot news at gmail
+	dot com]. If you have an account here at Swoosh News, you may want
+    to put your email address in your {% if user.is_authenticated %}<a href="{% url news.views.users.user user.username %}"> user profile</a>{% else %}user profile{% endif %}, 
+    so I can confirm that you are who you say you are.</p>
+
+
+</div>
+
+{% endblock %}

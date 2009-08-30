@@ -1,0 +1,122 @@
+
+/**************************************************************
+ * This contains the main css values that are to be used by all
+ * of the other style sheets.
+ **************************************************************/
+
+body {
+	font-size: 15px;
+	font-family: Veranda;
+	width: 100%;
+	margin: 0px;
+	margin-top: 8px;
+}
+
+.container-for-everything {
+	/* makes it only go 84% of the way across the screen 
+	 * and centered */
+	width: 84%;
+	margin-left: auto;
+	margin-right: auto;
+
+	/* (very) light gray background color */
+	background-color: #f6f6ef;
+}
+
+footer, section, article {
+	display: block;
+	width: 100%;
+	background-color: inherit;
+}
+
+a {
+	/* keeps all links from being underlined */
+	text-decoration: none;
+}
+
+
+section {
+	/* this is the medium gray text color */
+	color: #828282;
+	float: left;
+	padding-top: 12px;
+	padding-bottom: 10px;
+}
+
+/***********************
+ Error when posting a form.
+ ***********************/
+.posting-error {
+	color: red;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+/**********************
+ long text at the bottom of a page or on 
+ a page by itself
+ **********************/
+.long-text {
+	/* makes it only go 84% of the way across the screen 
+	 * and centered */
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+
+	/* (very) light gray background color */
+	background-color: #f6f6ef;
+}
+
+/***********************
+ The question part of a faq
+ ***********************/
+.faq-question {
+	font-weight: bold;
+}
+
+.faq-answer {}
+
+/**********************
+ Table -- right now it's only use for 
+ the prices of posting a comment and 
+ voting on comments/news items.
+ **********************/
+table {
+    border-width: 0px;
+    border-color: black;
+    border-style: none;
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-collapse: collapse;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+th, td {
+    text-align: right;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    padding: 8px;
+}
+
+
+
+/*********************
+ Some basic text styles to reduce the size of the css files.
+
+ Unimportant text should be a grayish color,
+ while important text should be black.
+ *********************/
+.unimportant-text { color: #828282 !important; }
+.important-text { color: black !important; }
+
+/*.unimportant-if-visited {color: #828282 !important; }*/
+.unimportant-if-visited:visited {color: #828282 !important; }
+
+.no-underline {text-decoration: none !important; }
+.underline { text-decoration: underline !important; }
