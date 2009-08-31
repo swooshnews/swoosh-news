@@ -41,3 +41,6 @@
 * add google checkout and amazon fps
 * give someone points for getting their comment voted up.
 * people get points back after being voted on
+
+* change css files to use media url:
+	http://blog.dpeepul.com/2009/08/31/top-10-tips-to-a-new-django-developer/
