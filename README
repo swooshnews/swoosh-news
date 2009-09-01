@@ -5,11 +5,14 @@ SETUP
 1. Install Django
 http://docs.djangoproject.com/en/dev/topics/install/
 
+
 2. Create your project.
 http://docs.djangoproject.com/en/dev/intro/tutorial01/
 
+
 3. Get the source to Swoosh News.
 git clone git://github.com/swooshnews/swoosh-news.git
+
 
 4. Make symlinks from your project to the Swoosh News templates and app.
 
@@ -19,6 +22,7 @@ $ mkdir templates
 $ cd templates
 $ ln -sf other/path/swoosh-news/news-templates news
 
+
 5. Make sure your urls.py is set up correctly.  Here is mine:
 
 from django.conf.urls.defaults import *
@@ -26,8 +30,8 @@ urlpatterns = patterns('',
 	(r'^', include('swoosh_news.news.urls')),
 )
 
-
 You will want to change 'swoosh_news' to whatever your project is called.
+
 
 6. Make sure your settings are set correctly. Use my notes below and this page (http://docs.djangoproject.com/en/dev/ref/settings/) to find appropriate values for these settings.
 
@@ -132,6 +136,7 @@ Also, add your Paypal receiver email.
 
 PAYPAL_RECEIVER_EMAIL = 'your-recv-addr@example.com'
 	
+
 9. Make sure everything is on the PYTHONPATH.
 
 First and foremost, the PYTHONPATH needs to be setup correctly for the
@@ -163,3 +168,5 @@ fi
 
 
 10. Install additional media.
+
+
