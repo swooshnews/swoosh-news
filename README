@@ -1,0 +1,165 @@
+
+SETUP
+-----
+
+1. Install Django
+http://docs.djangoproject.com/en/dev/topics/install/
+
+2. Create your project.
+http://docs.djangoproject.com/en/dev/intro/tutorial01/
+
+3. Get the source to Swoosh News.
+git clone git://github.com/swooshnews/swoosh-news.git
+
+4. Make symlinks from your project to the Swoosh News templates and app.
+
+$ cd ~/some/path/to/your/project
+$ ln -sf other/path/swoosh-news/news-app news
+$ mkdir templates
+$ cd templates
+$ ln -sf other/path/swoosh-news/news-templates news
+
+5. Make sure your urls.py is set up correctly.  Here is mine:
+
+from django.conf.urls.defaults import *
+urlpatterns = patterns('',
+	(r'^', include('swoosh_news.news.urls')),
+)
+
+
+You will want to change 'swoosh_news' to whatever your project is called.
+
+6. Make sure your settings are set correctly. Use my notes below and this page (http://docs.djangoproject.com/en/dev/ref/settings/) to find appropriate values for these settings.
+
+Here are the important lines of my `./manage.py diffsettings`
+
+# error reports will go to this email address
+ADMINS = (('username', 'email@example.com'),)
+
+# This is used to extend the User model.
+# (NOTE: this is not news.models.UserProfile, just news.UserProfile'
+AUTH_PROFILE_MODULE = 'news.UserProfile'
+
+# Make sure these next two are set correctly.  You can find out how in the
+# django documentation.
+DATABASE_ENGINE = ...
+DATABASE_NAME = ...
+
+
+# These are all used for sending email.
+EMAIL_HOST = 'your.host.com'
+EMAIL_HOST_PASSWORD = 'your_password'
+EMAIL_HOST_USER = 'your_username'
+EMAIL_PORT = PORTNUM
+EMAIL_USE_TLS = True
+
+
+INSTALLED_APPS = ['django.contrib.auth', 
+				  'django.contrib.contenttypes', 
+				  'django.contrib.sessions', 
+				  # this is the name of the news app referenced
+				  # in step 4 and step 9.
+				  'news',]
+
+# this is the path to additional media (delt with in step 10)
+MEDIA_ROOT = '/path/to/media/'
+MEDIA_URL = 'http://www.example.org/media/'
+
+# These are the addresses dealing with notifications on payment failures.
+#
+# This is the sending address.
+NEWS_PAY_ERR_MAIL_FROM = 'swoosh.news.failures@gmail.com'  ###
+# This is the address receiving payment errors.
+NEWS_PAY_ERR_MAIL_TO = 'swoosh.news.pay.failures@gmail.com'  ###
+
+# Your root url_conf
+ROOT_URLCONF = 'your_project_name.urls'  ###
+
+# This is the address that error messages will come from, 
+# such as those sent to ADMINS and MANAGERS
+SERVER_EMAIL = 'originating-email@example.com'
+
+# The settings module for this project
+SETTINGS_MODULE = 'your_project_name.settings'  ###
+
+# These are the context processors you need.  The most important ones
+# are auth, request, and settings.
+TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.auth', 
+							   'django.core.context_processors.debug', 
+							   'django.core.context_processors.i18n', 
+							   'django.core.context_processors.media', 
+							   'django.core.context_processors.request', 
+							   'news.context_processors.settings')
+
+# This refers to the template directory we created in step 4.
+TEMPLATE_DIRS = ('/some/path/to/your/project/templates',)
+
+
+7. Make sure your database is setup correctly in settings.py.
+
+$ cd
+$ mkdir your_project_database
+$ cd ~/some/path/to/your/project
+$ ln -sf ~/your_project_database
+
+
+8. Install django-paypal.  You don't necessarily need to use
+django-paypal, or accept payments at all, but decoupling it from the
+rest of the Swoosh News code will take a little bit of hacking.
+
+You can find out about django-paypal from the README here:
+http://github.com/johnboxall/django-paypal/tree/master
+
+The easier way to get and use django-paypal with this project is
+to just put it inside your project directory.
+
+$ cd ~/some/path/to/your/project
+$ git clone git://github.com/johnboxall/django-paypal.git paypal
+
+There is more detail in the django-paypal README, but you also need
+to add a few additional items in your settings.py.
+
+Add 'paypal.standard.ipn' to INSTALLED_APPS. So now INSTALLED_APPS
+should look like this:
+
+INSTALLED_APPS = ['django.contrib.auth', 
+				  'django.contrib.contenttypes', 
+				  'django.contrib.sessions', 
+				  'news', 
+				  'paypal.standard.ipn']
+
+Also, add your Paypal receiver email.
+
+PAYPAL_RECEIVER_EMAIL = 'your-recv-addr@example.com'
+	
+9. Make sure everything is on the PYTHONPATH.
+
+First and foremost, the PYTHONPATH needs to be setup correctly for the
+web server, otherwise nothing will work!
+
+I added this to my django.wsgi (which the web server reads on startup):
+sys.path.append('/home/youruser/some/path/to/your/django_projects')
+sys.path.append('/home/youruser/some/path/to/your/django_projects/your_project')
+
+You can find more information about django.wsgi here:
+http://code.google.com/p/modwsgi/wiki/IntegrationWithDjango
+
+
+Also, you need the PYTHONPATH to be set correctly for your user, if you want
+to be able to use init_db_vals.py and update_ranking.py from news_app/scripts/.
+This can be done in your ~/.bashrc.  Just add something like this:
+
+# add python path for your projects
+if [ -d "$HOME/some/path/to/your/django_projects/" ]
+then
+export PYTHONPATH="$PYTHONPATH:$HOME/some/path/to/your/django_projects/"
+fi
+
+# add a python path for paypal and the news app.
+if [ -d "$HOME/some/path/to/your/django_projects/your_project/" ]
+then
+export PYTHONPATH="$PYTHONPATH:$HOME/some/path/to/your/django_projects/your_project/"
+fi
+
+
+10. Install additional media.
