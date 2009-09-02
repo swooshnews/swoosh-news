@@ -83,3 +83,9 @@ NEWS_UPDATE_RANKING_LOCKFILE = getattr(settings, "NEWS_UPDATE_RANKING_LOCKFILE",
 # tells how many items should be shown on the frontpage
 NEWS_ITEMS_FRONTPAGE = getattr(settings, "NEWS_ITEMS_FRONTPAGE", 15)
 
+
+# Should we use the Paypal sandbox when accepting payments or the real site?
+NEWS_PAYPAL_USE_SANDBOX = True
+
+# The button id for our paypal button.
+NEWS_PAYPAL_HOSTED_BUTTON_ID = 1055099
