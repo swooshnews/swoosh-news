@@ -17,10 +17,10 @@ git clone git://github.com/swooshnews/swoosh-news.git
 4. Make symlinks from your project to the Swoosh News templates and app.
 
 $ cd ~/some/path/to/your/project
-$ ln -sf other/path/swoosh-news/news-app news
+$ ln -sf other/path/swoosh-news/news_app news
 $ mkdir templates
 $ cd templates
-$ ln -sf other/path/swoosh-news/news-templates news
+$ ln -sf other/path/swoosh-news/news_templates news
 
 
 5. Make sure your urls.py is set up correctly.  Here is mine:
@@ -167,6 +167,13 @@ export PYTHONPATH="$PYTHONPATH:$HOME/some/path/to/your/django_projects/your_proj
 fi
 
 
-10. Install additional media.
+10. Install additional media. The templates for Swoosh News use 
+additional media, such as CSS files.  These can be setup by 
+symlinking the news_media directory under your basic media directory.
 
+So, for instance, if your media directory is ~/path/to/media, you
+would want to do this:
+
+$ cd ~/path/to/media
+$ ln -sf other/path/swoosh-news/news_media
 
