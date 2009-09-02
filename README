@@ -106,6 +106,9 @@ $ mkdir your_project_database
 $ cd ~/some/path/to/your/project
 $ ln -sf ~/your_project_database
 
+After this you will want to run `./manage.py syncdb` as per
+the normal Django instructions.
+
 
 8. Install django-paypal.  You don't necessarily need to use
 django-paypal, or accept payments at all, but decoupling it from the
@@ -177,3 +180,5 @@ would want to do this:
 $ cd ~/path/to/media
 $ ln -sf other/path/swoosh-news/news_media
 
+
+11. Make sure the permissions on the media files are set correctly.  
