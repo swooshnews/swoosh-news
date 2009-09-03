@@ -51,6 +51,7 @@ def update_ranking(milliseconds=500, daemonize=False):
     from news.models import Rankable
     from news.helpers import get_frontpage_querymanager
     from news.conf import NEWS_UPDATE_RANKING_LOCKFILE
+    from django import db
 
 
     # if this is a daemon, make sure it can only be run once
@@ -107,7 +108,6 @@ def update_ranking(milliseconds=500, daemonize=False):
         random_rankable = querymanager[randint(0, num_rankables-1)]
         do_update(random_rankable)
 
-
     while True:
         try:
             # update a random rankable
@@ -119,6 +119,8 @@ def update_ranking(milliseconds=500, daemonize=False):
 
             # update random top 50 frontpage rankable
             do_random_update_from_query(get_frontpage_querymanager())
+
+            db.reset_queries()
 
         except KeyboardInterrupt:
             # exit gracefully on ctrl-c
