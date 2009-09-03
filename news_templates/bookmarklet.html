@@ -16,8 +16,8 @@ Bookmarklet for posting stories
 
     <p> Here is a bookmarklet for submitting articles to swoosh news.
     Just drag this link up to your tool bar.  When you get a page you want
-    to submit, click the link.  You will be brought to the <a href="{%
-    url news.views.news_items.submit %}">submission</a> page here at
+	to submit, click the link.  You will be brought to the <a 
+	href="{% url news.views.news_items.submit %}">submission</a> page here at
     Swoosh News.</p>
 
     <p style="text-align: center;"><a href="javascript:window.location=%22http://swooshnews.org/submit?url=%22+encodeURIComponent(document.location)+%22&amp;title=%22+encodeURIComponent(document.title)">post to SN</a></p>
