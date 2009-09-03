@@ -120,6 +120,8 @@ def update_ranking(milliseconds=500, daemonize=False):
             # update random top 50 frontpage rankable
             do_random_update_from_query(get_frontpage_querymanager())
 
+            # this is needed to Django doesn't hog memory if we are running under
+            # DEBUG = True
             db.reset_queries()
 
         except KeyboardInterrupt:
