@@ -26,7 +26,7 @@ def get_frontpage_querymanager(request=None):
                 NewsItem.objects.filter(date_posted__gt=(datetime_ago(weeks=4)),
                         dead=False)
 
-    querymanager = querymanager.order_by('-ranking')
+    querymanager = querymanager.order_by('-ranking', '-date_posted')
 
     return querymanager
 
