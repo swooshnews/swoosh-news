@@ -23,8 +23,8 @@ It uses the variable "news_item" and "full_news_item"
 </div>
 {% if full_news_item %}
 	{% if news_item.is_ask_sn %}
-		<div class="important-text">
-			{{ news_item.text|linebreaks }}
+		<div class="important-text underline-links">
+			{{ news_item.text|urlize|linebreaks }}
 		</div>
 	{% endif %}
 {% endif %}

@@ -40,6 +40,6 @@ and when replying to a comment.
     {% endif %}
 
 </div>
-<div class="important-text">
-	{{ comment.text|linebreaks }}
+<div class="important-text underline-links">
+	{{ comment.text|urlize|linebreaks }}
 </div>

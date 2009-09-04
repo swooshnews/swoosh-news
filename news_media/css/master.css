@@ -120,3 +120,9 @@ th, td {
 
 .no-underline {text-decoration: none !important; }
 .underline { text-decoration: underline !important; }
+
+.underline-links a { 
+	text-decoration: underline !important; 
+	color: black !important;
+}
+
