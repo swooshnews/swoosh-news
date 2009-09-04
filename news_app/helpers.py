@@ -38,7 +38,7 @@ def get_child_comments(comment_set, depth=0, return_dead=True):
     """
     comments = []
 
-    for com in sorted(comment_set.all(), key=lambda cm: -cm.ranking):
+    for com in sorted(comment_set.all().order_by('-date_posted'), key=lambda cm: -cm.ranking):
 
         if return_dead or not com.dead:
             comments.append({'comment': com, 'depth': depth})
