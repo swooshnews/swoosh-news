@@ -36,13 +36,13 @@
 
 /* this is data on a form, such as email address, username, "about", etc
  * (for the user form.) */
-div.form-data {
+.form-data {
 	float: left;
 
 	/* see min-width above. 
 	 * this can't actually be 80% because of the 10px padding
 	 * from the .form-heading. */
-	max-width: 75%
+	max-width: 75%;
 }
 
 div.form-data p {
