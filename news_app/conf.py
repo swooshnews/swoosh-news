@@ -89,3 +89,8 @@ NEWS_PAYPAL_USE_SANDBOX = getattr(settings, "NEWS_PAYPAL_USE_SANDBOX", True)
 
 # The button id for our paypal button.
 NEWS_PAYPAL_HOSTED_BUTTON_ID = getattr(settings, "NEWS_PAYPAL_HOSTED_BUTTON_ID", 1055099)
+
+# The Google analytics tracking number so that I can see who is using my site
+NEWS_GOOGLE_ANALYTICS_TRACKING_NUM = getattr(settings, \
+        "NEWS_GOOGLE_ANALYTICS_TRACKING_NUM", "UA-10551093-1")
+

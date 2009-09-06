@@ -50,6 +50,23 @@
 		<link type="image/x-icon" href="/favicon.ico" rel="icon" 
 			sizes="16x16 32x32 64x64 128x128" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+		{% if not settings.DEBUG %}
+			{% if user.get_profile.option_use_javascript %}
+				<script type="text/javascript">
+				var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+				document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+				</script>
+				<script type="text/javascript">
+					try {
+						var pageTracker = _gat._getTracker("{{ NEWS_GOOGLE_ANALYTICS_TRACKING_NUM }}");
+						pageTracker._trackPageview();
+					} catch(err) {}
+				</script>
+			{% endif %}
+		{% endif %}
+
+
 		<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
