@@ -8,7 +8,7 @@ from django.conf import settings
 NEWS_MAX_TITLE_LENGTH = getattr(settings, "NEWS_MAX_TITLE_LENGTH", 100)
 
 # max length for a url
-NEWS_MAX_URL_LENGTH = getattr(settings, "NEWS_MAX_URL_LENGTH", 125)
+NEWS_MAX_URL_LENGTH = getattr(settings, "NEWS_MAX_URL_LENGTH", 300)
 
 # max length for someone's email address
 NEWS_MAX_EMAIL_LENGTH = getattr(settings, "NEWS_MAX_EMAIL_LENGTH", 100)
